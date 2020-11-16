@@ -12,7 +12,10 @@
   "dependencies": {
     "@react-native-community/geolocation": "^2.0.2",
     "@react-native-community/masked-view": "^0.1.10",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.3",
     "native-base": "^2.13.14",
+    "nodemon": "^2.0.6",
     "prop-types": "^15.7.2",
     "react": "16.13.1",
     "react-addons-update": "^15.6.2",
@@ -29,6 +32,7 @@
     "react-native-router-flux": "^3.39.1",
     "react-native-safe-area-context": "^3.1.8",
     "react-native-screens": "^2.10.1",
+    "react-native-spinkit": "^1.5.1",
     "react-native-typing-animation": "^0.1.7",
     "react-native-vector-icons": "^7.0.0",
     "react-navigation": "^4.4.0",
@@ -36,6 +40,7 @@
     "react-navigation-stack": "^2.8.2",
     "react-redux": "^7.2.1",
     "redux": "^4.0.5",
+    "redux-socket.io": "^1.4.0",
     "redux-thunk": "^2.3.0",
     "socket.io": "^2.3.0",
     "superagent": "^6.1.0"

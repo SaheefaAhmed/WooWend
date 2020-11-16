@@ -7,7 +7,7 @@ var bookings = require("./routes/bookings");
 var driverLocation = require("./routes/driverLocation");
 var driverLocationSocket = require("./routes/driverLocation");
 var authRoutes = require("./routes/authRoutes");
-
+var drivers = require("./routes/drivers");
 var app = express();
 
 var port = 3000;
@@ -15,7 +15,7 @@ var port = 3000;
 
 
 var socket_io = require("socket.io");
-
+const { func } = require("prop-types");
 var io = socket_io();
 
 //views
@@ -37,6 +37,8 @@ app.use("/api", bookings);
 app.use("/api", driverLocation);
 app.use("/api",driverLocationSocket);
 app.use("/api",authRoutes);
+app.use("/api",drivers);
+
 
 
 
@@ -45,3 +47,8 @@ app.use("/api",authRoutes);
 io.listen(app.listen(port, function(){
 	console.log("Server running on port", port);
 }));
+
+
+app.io = io.on("connection", function(socket){
+	console.log("Socket connected: " + socket.id);
+});

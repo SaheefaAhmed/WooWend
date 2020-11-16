@@ -85,7 +85,7 @@ export function toggleSearchResultModal(payload){
 
 export function getAddressPredictions(){
 	return(dispatch, store)=>{
-		let userInput = store().home.resultTypes.pickUp ? store().home.inputData.pickUp : store().home.inputData.dropOff;
+		let userInput = home.resultTypes.pickUp ? store().home.inputData.pickUp : store().home.inputData.dropOff;
 		RNGooglePlaces.getAutocompletePredictions(userInput,
 			{
 				country:"PK"
@@ -165,11 +165,11 @@ export function getSelectedAddress(payload){
 
 export function bookCar(){
 	return (dispatch, store)=>{
-		//const nearByDrivers = store().home.nearByDrivers;
-		//const nearByDriver = nearByDrivers[Math.floor(Math.random() * nearByDrivers.length)];
+		const nearByDrivers = store().home.nearByDrivers;
+		const nearByDriver = nearByDrivers[Math.floor(Math.random() * nearByDrivers.length)];
 		const payload = {
 			data:{
-				userName:"Safia Ansari",
+				userName:"Saheefa Ahmed",
 				pickUp:{
 					address:store().home.selectedAddress.selectedPickUp.address,
 					name:store().home.selectedAddress.selectedPickUp.name,
@@ -185,14 +185,13 @@ export function bookCar(){
 				fare:store().home.fare,
 				status:"pending"
 			},
-			//nearByDriver:{
-				//socketId:nearByDriver.socketId,
-				//driverId:nearByDriver.driverId,
-				//latitude:nearByDriver.coordinate.coordinates[0],
-				//longitude:nearByDriver.coordinate.coordinates[1]
-			//}
+			nearByDriver:{
+				socketId:nearByDriver.socketId,
+				driverId:nearByDriver.driverId,
+				latitude:nearByDriver.coordinate.coordinates[1],
+				longitude:nearByDriver.coordinate.coordinates[0]
+			}
 		};
-
 		request.post("http://192.168.1.103:3000/api/bookings")
 		.send(payload)
 		.finish((error, res)=>{
@@ -369,7 +368,7 @@ function handleGetNearbyDrivers(state, action){
 
 
 
-const ACTION_HANDLERS={ 
+const ACTION_HANDLERS = {
 	GET_CURRENT_LOCATION:handleGetCurrentLocation,
 	GET_INPUT:handleGetInputDate,
 	TOGGLE_SEARCH_RESULT:handleToggleSearchResult,
@@ -379,7 +378,10 @@ const ACTION_HANDLERS={
 	GET_FARE:handleGetFare,
 	BOOK_CAR:handleBookCar,
 	GET_NEARBY_DRIVERS:handleGetNearbyDrivers
-	};
+	//BOOKING_CONFIRMED:handleBookingConfirmed
+
+
+}
 
 const initialState = { 
 		region:{},

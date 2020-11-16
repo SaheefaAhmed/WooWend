@@ -29,10 +29,12 @@ export default class Home extends React.Component{
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421
         }
-
+        const { status } = this.props.booking;
         return(
              
             <Container>
+                { (status !== "pending") &&
+                    <View style={{flex:1}}>
                     { this.props.region.latitude &&
                         <MapContainer region={this.props.region}
                                   getInputData={this.props.getInputData}
@@ -54,6 +56,11 @@ export default class Home extends React.Component{
 							<Fare fare={this.props.fare} />
 						}
                     <FooterComponent/>
+                    </View>
+                    ||
+                    <FindDriver selectedAddress={this.props.selectedAddress}/>
+                }
+                    
                 
             </Container>
         )
